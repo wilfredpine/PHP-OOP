@@ -11,6 +11,25 @@ if (!empty($_SESSION['username'])) {
 
 ?>
 
+
+<?php
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $result = $con->check($username, $password);
+    if ($result) {
+        if ($result['username'] == $_POST['username'] && $result['password'] == $_POST['password']) {
+            $_SESSION['username'] = $result['username'];
+            header('location:index.php');
+        } else {
+            echo "error";
+        }
+    } else {
+        echo "error";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,21 +90,3 @@ if (!empty($_SESSION['username'])) {
 </body>
 
 </html>
-
-<?php
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $result = $con->check($username, $password);
-    if ($result) {
-        if ($result['username'] == $_POST['username'] && $result['password'] == $_POST['password']) {
-            $_SESSION['username'] = $result['username'];
-            header('location:index.php');
-        } else {
-            echo "error";
-        }
-    } else {
-        echo "error";
-    }
-}
-?>

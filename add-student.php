@@ -9,6 +9,21 @@ if (empty($_SESSION['username'])) {
 
 ?>
 
+
+<?php
+if (isset($_POST['save'])) {
+    $fname = $_POST['fname'];
+    $mname = $_POST['mname'];
+    $lname = $_POST['lname'];
+    if ($con->save($fname, $mname, $lname)) {
+        header('location:index.php');
+    } else {
+        echo "error";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,17 +74,3 @@ if (empty($_SESSION['username'])) {
 </body>
 
 </html>
-
-<?php
-if (isset($_POST['save'])) {
-    $fname = $_POST['fname'];
-    $mname = $_POST['mname'];
-    $lname = $_POST['lname'];
-    if ($con->save($fname, $mname, $lname)) {
-        header('location:index.php');
-    } else {
-        echo "error";
-    }
-}
-
-?>
