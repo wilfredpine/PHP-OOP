@@ -15,6 +15,21 @@ if (isset($_GET['id'])) {
 
 ?>
 
+<?php
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $fname = $_POST['fname'];
+    $mname = $_POST['mname'];
+    $lname = $_POST['lname'];
+    if ($con->update($id, $fname, $mname, $lname)) {
+        header('location:index.php');
+    } else {
+        echo "error";
+    }
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,15 +56,18 @@ if (isset($_GET['id'])) {
                             </div>
                             <div class="form-floating mb-3">
                                 <label>First Name</label>
-                                <input type="text" name="fname" value="<?php echo $data['fname']; ?>" class="form-control" required>
+                                <input type="text" name="fname" value="<?php echo $data['fname']; ?>"
+                                    class="form-control" required>
                             </div>
                             <div class="form-floating mb-3">
                                 <label>Middle Name</label>
-                                <input type="text" name="mname" value="<?php echo $data['mname']; ?>" class="form-control" required>
+                                <input type="text" name="mname" value="<?php echo $data['mname']; ?>"
+                                    class="form-control" required>
                             </div>
                             <div class="form-floating mb-3">
                                 <label>Last Name</label>
-                                <input type="text" name="lname" value="<?php echo $data['lname']; ?>" class="form-control" required>
+                                <input type="text" name="lname" value="<?php echo $data['lname']; ?>"
+                                    class="form-control" required>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="submit" name="update" class="btn btn-success btn-lg" value="Update">
@@ -69,17 +87,3 @@ if (isset($_GET['id'])) {
 </body>
 
 </html>
-<?php
-if (isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $fname = $_POST['fname'];
-    $mname = $_POST['mname'];
-    $lname = $_POST['lname'];
-    if ($con->update($id, $fname, $mname, $lname)) {
-        header('location:index.php');
-    } else {
-        echo "error";
-    }
-}
-
-?>

@@ -11,6 +11,15 @@ if (empty($_SESSION['username'])) {
 
 ?>
 
+<?php
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    if ($con->delete($id)) {
+        header('location:index.php');
+    }
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,16 +59,18 @@ if (empty($_SESSION['username'])) {
                                 foreach ($data as $rows) {
                                 ?>
 
-                                    <tr>
-                                        <td><?php echo $counter++; ?></td>
-                                        <td><?php echo $rows['fname']; ?></td>
-                                        <td><?php echo $rows['mname']; ?></td>
-                                        <td><?php echo $rows['lname']; ?></td>
-                                        <td>
-                                            <a href="update.php?id=<?php echo $rows['id'] ?>" class="btn btn-success btn-sm">Update </a>
-                                            <a href="index.php?id=<?php echo $rows['id'] ?>" class="btn btn-danger btn-sm">Delete </a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td><?php echo $counter++; ?></td>
+                                    <td><?php echo $rows['fname']; ?></td>
+                                    <td><?php echo $rows['mname']; ?></td>
+                                    <td><?php echo $rows['lname']; ?></td>
+                                    <td>
+                                        <a href="update.php?id=<?php echo $rows['id'] ?>"
+                                            class="btn btn-success btn-sm">Update </a>
+                                        <a href="index.php?id=<?php echo $rows['id'] ?>"
+                                            class="btn btn-danger btn-sm">Delete </a>
+                                    </td>
+                                </tr>
 
                                 <?php
                                 }
@@ -80,12 +91,3 @@ if (empty($_SESSION['username'])) {
 </body>
 
 </html>
-
-<?php
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    if ($con->delete($id)) {
-        header('location:index.php');
-    }
-}
-?>

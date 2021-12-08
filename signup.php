@@ -10,6 +10,25 @@ if (!empty($_SESSION['username'])) {
 
 ?>
 
+<?php
+
+if (isset($_POST['signup'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirm = $_POST['confirm'];
+    if ($password == $confirm) {
+
+        if ($con->signup($username, $password)) {
+            header('location:login.php');
+        } else {
+            echo "error";
+        }
+    } else {
+        echo "password did not match";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,21 +90,3 @@ if (!empty($_SESSION['username'])) {
 </body>
 
 </html>
-<?php
-
-if (isset($_POST['signup'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $confirm = $_POST['confirm'];
-    if ($password == $confirm) {
-
-        if ($con->signup($username, $password)) {
-            header('location:login.php');
-        } else {
-            echo "error";
-        }
-    } else {
-        echo "password did not match";
-    }
-}
-?>
