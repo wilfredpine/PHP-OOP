@@ -10,20 +10,6 @@ if (empty($_SESSION['username'])) {
 ?>
 
 
-<?php
-if (isset($_POST['save'])) {
-    $fname = $_POST['fname'];
-    $mname = $_POST['mname'];
-    $lname = $_POST['lname'];
-    if ($con->save($fname, $mname, $lname)) {
-        header('location:index.php');
-    } else {
-        echo "error";
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,6 +28,21 @@ if (isset($_POST['save'])) {
 
                         <h1 class="h3 mb-3 fw-normal">Add Student</h1>
                         <hr><br>
+
+
+                        <?php
+                            if (isset($_POST['save'])) {
+                                $fname = $_POST['fname'];
+                                $mname = $_POST['mname'];
+                                $lname = $_POST['lname'];
+                                if ($con->save($fname, $mname, $lname)) {
+                                    header('location:index.php');
+                                } else {
+                                    echo "error";
+                                }
+                            }
+
+                        ?>
 
                         <form method="post">
                             <div class="form-floating mb-3">

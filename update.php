@@ -8,26 +8,6 @@ if (empty($_SESSION['username'])) {
     header('location:login.php');
 }
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $data = $con->viewdata($id);
-}
-
-?>
-
-<?php
-if (isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $fname = $_POST['fname'];
-    $mname = $_POST['mname'];
-    $lname = $_POST['lname'];
-    if ($con->update($id, $fname, $mname, $lname)) {
-        header('location:index.php');
-    } else {
-        echo "error";
-    }
-}
-
 ?>
 
 
@@ -49,6 +29,30 @@ if (isset($_POST['update'])) {
 
                         <h1 class="h3 mb-3 fw-normal">Edit Student</h1>
                         <hr>
+
+
+                        <?php
+                            // get data
+                            if (isset($_GET['id'])) {
+                                $id = $_GET['id'];
+                                $data = $con->viewdata($id);
+                            }
+
+                            // update data
+                            if (isset($_POST['update'])) {
+                                $id = $_POST['id'];
+                                $fname = $_POST['fname'];
+                                $mname = $_POST['mname'];
+                                $lname = $_POST['lname'];
+                                if ($con->update($id, $fname, $mname, $lname)) {
+                                    header('location:index.php');
+                                } else {
+                                    echo "error";
+                                }
+                            }
+
+                        ?>
+
 
                         <form method="post">
                             <div class="form-floating mb-3">
